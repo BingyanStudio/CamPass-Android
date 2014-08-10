@@ -21,11 +21,10 @@ public class API {
 
         /**
          * 四个参数，通过拼音可以看出含义
-         *
          * @param quyu
          * @param loudong
          * @param fangjian
-         */
+        */
         @GET("/check_dianfei")
         void getElectricJson(@Query("quyu") String quyu,
                              @Query("loudong") int loudong,

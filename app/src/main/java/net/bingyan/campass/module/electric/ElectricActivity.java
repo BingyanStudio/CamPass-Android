@@ -2,6 +2,9 @@ package net.bingyan.campass.module.electric;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -9,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -42,7 +46,7 @@ public class ElectricActivity extends BaseActivity implements View.OnClickListen
     private Spinner area;
     private EditText building;
     private EditText dorm;
-    private MyListAdapter myListAdapter;
+    private MyRecordAdapter myRecordAdapter;
 
     //校区、楼栋、寝室号
     private String areaStr;
@@ -70,9 +74,10 @@ public class ElectricActivity extends BaseActivity implements View.OnClickListen
 
     private void initView() {
         //电费的列表
-        ListView recordList = (ListView) findViewById(R.id.record_list);
-        myListAdapter = new MyListAdapter(this);
-        recordList.setAdapter(myListAdapter);
+        RecyclerView recordList = (RecyclerView) findViewById(R.id.record_list);
+        recordList.setLayoutManager(new LinearLayoutManager(this));
+        myRecordAdapter = new MyRecordAdapter(this);
+        recordList.setAdapter(myRecordAdapter);
 
         //初始化Spinner
         area = (Spinner) findViewById(R.id.electric_loc_area);
@@ -131,29 +136,25 @@ public class ElectricActivity extends BaseActivity implements View.OnClickListen
                 e.printStackTrace();
             }
             //如果数据时最后缓存日期之前的，则不在重复缓存
-            if ((recentDate != null) && (date == null || !date.after(recentDate))) {
-                continue;
+            if (null != recentDate) {
+                if ((null == date || !date.after(recentDate))) continue;
             }
 
-            electricRecord = new ElectricRecord();
-            electricRecord.setArea(areaStr);
-            electricRecord.setBuilding(buildingNum);
-            electricRecord.setDorm(dormNum);
-            electricRecord.setRemain(Float.valueOf(history.get(0)));
-            electricRecord.setDate(date);
+            electricRecord = new ElectricRecord(areaStr, buildingNum, dormNum,
+                    Float.valueOf(history.get(0)), date);
             //插入到数据库
             electricRecordDao.insertOrReplace(electricRecord);
 
             //将数据库中没有的数据加到List中
-            myListAdapter.dateList.add(i, listFormat.format(date));
-            myListAdapter.remainList.add(i ++, Float.valueOf(history.get(0)));
+            myRecordAdapter.dateList.add(i, listFormat.format(date));
+            myRecordAdapter.remainList.add(i++, Float.valueOf(history.get(0)));
         }
         //更新剩余电量
-        float remain = myListAdapter.remainList.size() == 0 ? 0 : myListAdapter.remainList.get(0);
-        TextView remainText = (TextView)findViewById(R.id.electric_remain);
+        float remain = myRecordAdapter.remainList.size() == 0 ? 0 : myRecordAdapter.remainList.get(0);
+        TextView remainText = (TextView) findViewById(R.id.electric_remain);
         remainText.setText(String.valueOf(remain));
         //刷新电费列表
-        myListAdapter.notifyDataSetInvalidated();
+        myRecordAdapter.notifyDataSetChanged();
     }
 
     private void display() {
@@ -168,19 +169,19 @@ public class ElectricActivity extends BaseActivity implements View.OnClickListen
         //数据库中最后缓存的日期和剩余电量
         recentDate = list.size() == 0 ? null : ((ElectricRecord) list.get(0)).getDate();
         float remain = list.size() == 0 ? 0 : ((ElectricRecord) list.get(0)).getRemain();
-        TextView remainText = (TextView)findViewById(R.id.electric_remain);
+        TextView remainText = (TextView) findViewById(R.id.electric_remain);
         remainText.setText(String.valueOf(remain));
 
         //先清空电费列表
-        myListAdapter.clear();
+        myRecordAdapter.clear();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (Object aList : list) {
             ElectricRecord record = (ElectricRecord) aList;
-            myListAdapter.dateList.add(simpleDateFormat.format(record.getDate()));
-            myListAdapter.remainList.add(record.getRemain());
+            myRecordAdapter.dateList.add(simpleDateFormat.format(record.getDate()));
+            myRecordAdapter.remainList.add(record.getRemain());
         }
         //刷新电费列表
-        myListAdapter.notifyDataSetInvalidated();
+        myRecordAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -190,6 +191,8 @@ public class ElectricActivity extends BaseActivity implements View.OnClickListen
                 areaStr = area.getSelectedItem().toString();
                 buildingNum = Integer.valueOf(building.getText().toString());
                 dormNum = Integer.valueOf(dorm.getText().toString());
+                building.clearFocus();
+                dorm.clearFocus();
                 //先展示数据库中的数据
                 display();
                 //再从网络请求
@@ -198,13 +201,13 @@ public class ElectricActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-    class MyListAdapter extends BaseAdapter {
+    class MyRecordAdapter extends RecyclerView.Adapter<MyRecordAdapter.ViewHolder> {
 
         private Context context;
         private List<String> dateList;
         private List<Float> remainList;
 
-        public MyListAdapter(Context context) {
+        public MyRecordAdapter(Context context) {
             this.context = context;
             dateList = new ArrayList<String>();
             remainList = new ArrayList<Float>();
@@ -216,40 +219,33 @@ public class ElectricActivity extends BaseActivity implements View.OnClickListen
         }
 
         @Override
-        public int getCount() {
-            return dateList.size();
+        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.electric_record_item, viewGroup, false);
+            return new ViewHolder(view);
         }
 
         @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = View.inflate(context, R.layout.activity_electric_record_list, null);
-                ViewHolder viewHolder = new ViewHolder();
-                viewHolder.date = (TextView) convertView.findViewById(R.id.record_list_date);
-                viewHolder.remain = (TextView) convertView.findViewById(R.id.record_list_remain);
-                convertView.setTag(viewHolder);
+        public void onBindViewHolder(ViewHolder viewHolder, int i) {
+            if (i < getItemCount()) {
+                viewHolder.date.setText(dateList.get(i));
+                viewHolder.remain.setText(String.valueOf(remainList.get(i)));
             }
-            ViewHolder viewHolder = (ViewHolder) convertView.getTag();
-            viewHolder.date.setText(dateList.get(position));
-            viewHolder.remain.setText(remainList.get(position).toString());
-
-            return convertView;
         }
 
-        class ViewHolder {
+        @Override
+        public int getItemCount() {
+            return remainList.size();
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder {
             TextView date;
             TextView remain;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+                date = (TextView)itemView.findViewById(R.id.electric_record_item_date);
+                remain = (TextView)itemView.findViewById(R.id.electric_record_item_remain);
+            }
         }
     }
-
 }
