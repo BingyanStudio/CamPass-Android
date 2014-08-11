@@ -1,6 +1,6 @@
 package net.bingyan.campass.module.electric;
 
-import net.bingyan.campass.ElectricRecordDao;
+import net.bingyan.campass.greendao.ElectricRecordDao;
 import net.bingyan.campass.MyApplication;
 
 import java.util.Date;

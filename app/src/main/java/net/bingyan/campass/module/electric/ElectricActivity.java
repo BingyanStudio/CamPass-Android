@@ -14,12 +14,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import net.bingyan.campass.ElectricRecord;
-import net.bingyan.campass.ElectricRecordDao;
+import net.bingyan.campass.greendao.ElectricRecord;
+import net.bingyan.campass.greendao.ElectricRecordDao;
 import net.bingyan.campass.MyApplication;
 import net.bingyan.campass.R;
 import net.bingyan.campass.rest.API;
-import net.bingyan.campass.rest.CacheDaoHelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -125,12 +124,12 @@ public class ElectricActivity extends Activity implements View.OnClickListener {
     }
 
     public void saveAndDiaplay(ElectricJson electricJson) {
-        //如果是绑定的寝室，则缓存json。也可以不用缓存json，因为电费已经做了缓存
-        if(areaStr.equals("韵苑") && buildingNum == 15 && dormNum == 306) {
-            CacheDaoHelper cacheDaoHelper = new CacheDaoHelper(
-                    (MyApplication) this.getApplicationContext());
-            cacheDaoHelper.putCache(electricJson);
-        }
+//        //如果是绑定的寝室，则缓存json。也可以不用缓存json，因为电费已经做了缓存
+//        if(areaStr.equals("韵苑") && buildingNum == 15 && dormNum == 306) {
+//            CacheDaoHelper cacheDaoHelper = new CacheDaoHelper(
+//                    (MyApplication) this.getApplicationContext());
+//            cacheDaoHelper.putCache(electricJson);
+//        }
 
         ElectricRecordDao electricRecordDao = ((MyApplication) this.getApplicationContext())
                 .getDaoSession().getElectricRecordDao();

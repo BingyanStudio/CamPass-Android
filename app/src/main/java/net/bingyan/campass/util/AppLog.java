@@ -6,17 +6,27 @@ import android.util.Log;
  * Created by ant on 14-8-9.
  */
 public class AppLog {
-    String TAG = "hustpass";
+    static String TAG = "Campass";
+    static boolean DEBUG = true;
     String className;
+
     public AppLog(Class<?> clazz) {
         className = '[' + clazz.getSimpleName() + ']';
     }
 
     public void v(String msg) {
-        if (msg != null) {
+
+        if(DEBUG){
             Log.v(TAG, className + msg);
-        } else {
+        }
+
+    }
+
+    public static void appv(String msg){
+
+        if(DEBUG){
             Log.v(TAG, msg);
         }
+
     }
 }

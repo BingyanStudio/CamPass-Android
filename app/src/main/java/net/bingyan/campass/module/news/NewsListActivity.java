@@ -38,23 +38,23 @@ public class NewsListActivity extends BaseActivity {
 
     //View
     public List<NewsListBean.Articlelist> data = new ArrayList<NewsListBean.Articlelist>();
-    MyAdapter mAdapter = new MyAdapter(this,data);
+    MyAdapter mAdapter = new MyAdapter(this, data);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.simple_recycleview);
-        newsListBeanCacheHelper= new CacheHelper<NewsListBean>(getApplication(),NewsListBean.class);
+        newsListBeanCacheHelper = new CacheHelper<NewsListBean>(getApplication(), NewsListBean.class);
         init();
     }
 
-    private void init(){
+    private void init() {
         //view
         initRecyclerView();
 
         //Data by cache
         NewsListBean newsListBean = newsListBeanCacheHelper.getCache();
-        if (newsListBean!=null) {
+        if (newsListBean != null) {
             initData(newsListBean);
         }
 
@@ -62,7 +62,7 @@ public class NewsListActivity extends BaseActivity {
         getByHttp(1);
     }
 
-    private void initRecyclerView(){
+    private void initRecyclerView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -77,12 +77,12 @@ public class NewsListActivity extends BaseActivity {
         service.getlist(API.NewsService.sort[0], pageNum, new Callback<NewsListBean>() {
             @Override
             public void success(NewsListBean newsListBean, Response response) {
-                if(pageNum==1){
+                if (pageNum == 1) {
                     initData(newsListBean);
                     mLog.v("start cache");
                     newsListBeanCacheHelper.putCache(newsListBean);
                     mLog.v("cached");
-                }else {
+                } else {
                     addData(newsListBean);
                 }
                 loading = false;
@@ -90,8 +90,8 @@ public class NewsListActivity extends BaseActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                mLog.v("error:"+error.getUrl());
-                mLog.v("error:"+error.getMessage());
+                mLog.v("error:" + error.getUrl());
+                mLog.v("error:" + error.getMessage());
                 loading = false;
             }
         });
@@ -113,7 +113,8 @@ public class NewsListActivity extends BaseActivity {
     private class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         List<NewsListBean.Articlelist> data;
         Context context;
-        public MyAdapter(Context context,List<NewsListBean.Articlelist> data) {
+
+        public MyAdapter(Context context, List<NewsListBean.Articlelist> data) {
             this.data = data;
             this.context = context;
         }
@@ -130,7 +131,7 @@ public class NewsListActivity extends BaseActivity {
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             mLog.v("onBind:" + i);
             if (i >= data.size() - 1) {
-                getByHttp( data.size() / 10 + 1);
+                getByHttp(data.size() / 10 + 1);
             }
             viewHolder.text.setText(data.get(i).getTitle());
         }

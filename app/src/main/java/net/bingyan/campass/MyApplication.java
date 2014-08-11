@@ -2,11 +2,9 @@ package net.bingyan.campass;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
-import android.preference.PreferenceManager;
-import android.util.Log;
 
-import net.bingyan.campass.DaoMaster;
-import net.bingyan.campass.DaoSession;
+import net.bingyan.campass.greendao.DaoMaster;
+import net.bingyan.campass.greendao.DaoSession;
 
 /**
  * Created by ant on 14-8-8.

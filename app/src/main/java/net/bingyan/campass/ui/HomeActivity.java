@@ -1,6 +1,5 @@
 package net.bingyan.campass.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,14 +12,13 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.bingyan.campass.Module;
-import net.bingyan.campass.ModuleDao;
+import net.bingyan.campass.ModuleConfig;
+import net.bingyan.campass.MyApplication;
 import net.bingyan.campass.R;
+import net.bingyan.campass.greendao.Module;
+import net.bingyan.campass.greendao.ModuleDao;
 
 import java.util.List;
-
-import net.bingyan.campass.MyApplication;
-import net.bingyan.campass.ModuleConfig;
 
 public class HomeActivity extends BaseActivity {
 
@@ -53,12 +51,6 @@ public class HomeActivity extends BaseActivity {
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(adapter);
     }
-
-
-
-
-
-
 
 
 
