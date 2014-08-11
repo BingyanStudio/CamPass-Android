@@ -15,7 +15,7 @@
         <option name="SOURCE_GEN_TASK_NAME" value="generateDebugSources" />
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
-        <option name="RES_FOLDER_RELATIVE_PATH" value="/../submodule/res" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/../submodule/src/res" />
         <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
       </configuration>
@@ -59,11 +59,11 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
     </content>
-    <content url="file://$MODULE_DIR$/../submodule/res">
-      <sourceFolder url="file://$MODULE_DIR$/../submodule/res" type="java-resource" />
+    <content url="file://$MODULE_DIR$/../submodule/src/java">
+      <sourceFolder url="file://$MODULE_DIR$/../submodule/src/java" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$/../submodule/src">
-      <sourceFolder url="file://$MODULE_DIR$/../submodule/src" isTestSource="false" />
+    <content url="file://$MODULE_DIR$/../submodule/src/res">
+      <sourceFolder url="file://$MODULE_DIR$/../submodule/src/res" type="java-resource" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
