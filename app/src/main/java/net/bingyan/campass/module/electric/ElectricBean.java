@@ -6,7 +6,7 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 
 //@Generated("org.jsonschema2pojo")
-public class ElectricJson {
+public class ElectricBean {
 
     @Expose
     private String remain;

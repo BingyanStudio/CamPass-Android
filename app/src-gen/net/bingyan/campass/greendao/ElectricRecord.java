@@ -29,6 +29,14 @@ public class ElectricRecord {
         this.date = date;
     }
 
+    public ElectricRecord(String area, Integer building, Integer dorm, Float remain, java.util.Date date) {
+        this.area = area;
+        this.building = building;
+        this.dorm = dorm;
+        this.remain = remain;
+        this.date = date;
+    }
+
     public Long getId() {
         return id;
     }

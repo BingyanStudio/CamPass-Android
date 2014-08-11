@@ -1,15 +1,12 @@
 package net.bingyan.campass.rest;
 
-import net.bingyan.campass.module.electric.ElectricJson;
+import net.bingyan.campass.module.electric.ElectricBean;
 import net.bingyan.campass.module.news.NewsContentBean;
 import net.bingyan.campass.module.news.NewsListBean;
-
-import java.util.Map;
 
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Query;
-import retrofit.http.QueryMap;
 
 
 /**
@@ -19,8 +16,20 @@ public class API {
     public static final String APIHOST = "http://api.hustonline.net/";
 
     public interface ElectricService {
+        public static final String HOST = "http://202.114.18.13:9093";
+        public static final String[] AREA = {"韵苑", "紫菘", "东区", "西区"};
+
+        /**
+         * 四个参数，通过拼音可以看出含义
+         * @param quyu
+         * @param loudong
+         * @param fangjian
+        */
         @GET("/check_dianfei")
-        void getElectricJson(@QueryMap Map<String, String> options,Callback<ElectricJson> cb);
+        void getElectricJson(@Query("quyu") String quyu,
+                             @Query("loudong") int loudong,
+                             @Query("fangjian") int fangjian,
+                             Callback<ElectricBean> cb);
 
     }
 

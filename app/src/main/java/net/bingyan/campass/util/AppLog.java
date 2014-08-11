@@ -29,4 +29,28 @@ public class AppLog {
         }
 
     }
+
+    public void d(String msg) {
+        if (msg != null) {
+            Log.d(TAG, className + msg);
+        } else {
+            Log.d(TAG, msg);
+        }
+    }
+
+    public void i(String msg) {
+        if (msg != null) {
+            Log.i(TAG, className + msg);
+        } else {
+            Log.i(TAG, msg);
+        }
+    }
+
+    public void e(String msg) {
+        if (msg != null) {
+            Log.e(TAG, className + msg);
+        } else {
+            Log.e(TAG, msg);
+        }
+    }
 }

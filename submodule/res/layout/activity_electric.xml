@@ -9,6 +9,7 @@
     tools:context="net.bingyan.campass.module.electric.ElectricActivity">
 
     <LinearLayout
+        android:id="@+id/electric_remain_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -29,14 +30,8 @@
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/record_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="60dp"
-        android:layout_marginTop="100dp" />
-
     <LinearLayout
+        android:id="@+id/electric_loc_linear"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
@@ -46,7 +41,8 @@
             android:id="@+id/electric_loc_area"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center">
 
         </Spinner>
 
@@ -55,6 +51,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:gravity="center"
             android:inputType="number" />
 
         <EditText
@@ -62,8 +59,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:inputType="number"
-            android:focusable="false"/>
+            android:gravity="center"
+            android:inputType="number" />
 
         <Button
             android:id="@+id/electric_query"
@@ -74,5 +71,14 @@
             android:text="@string/electric_query" />
 
     </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/record_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/electric_loc_linear"
+        android:layout_below="@id/electric_remain_linear"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>
