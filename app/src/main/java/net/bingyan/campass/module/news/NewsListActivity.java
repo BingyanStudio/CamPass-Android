@@ -44,7 +44,7 @@ public class NewsListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.simple_recycleview);
-        newsListBeanCacheHelper = new CacheHelper<NewsListBean>(getApplication(), NewsListBean.class);
+        newsListBeanCacheHelper = new CacheHelper<NewsListBean>(NewsListBean.class);
         init();
     }
 
