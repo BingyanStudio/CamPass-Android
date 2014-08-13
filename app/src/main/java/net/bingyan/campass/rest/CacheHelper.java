@@ -4,14 +4,12 @@ import android.app.Application;
 
 import com.google.gson.Gson;
 
-import net.bingyan.campass.Cache;
-import net.bingyan.campass.CacheDao;
-import net.bingyan.campass.DaoSession;
+import net.bingyan.campass.greendao.Cache;
+import net.bingyan.campass.greendao.CacheDao;
+import net.bingyan.campass.greendao.DaoSession;
 import net.bingyan.campass.MyApplication;
 
 import java.util.Date;
-
-import retrofit.Callback;
 
 /**
  * Created by ant on 14-8-9.

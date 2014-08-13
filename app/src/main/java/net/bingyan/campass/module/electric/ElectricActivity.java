@@ -8,18 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import net.bingyan.campass.ElectricRecord;
-import net.bingyan.campass.ElectricRecordDao;
 import net.bingyan.campass.MyApplication;
 import net.bingyan.campass.R;
+import net.bingyan.campass.greendao.ElectricRecord;
+import net.bingyan.campass.greendao.ElectricRecordDao;
 import net.bingyan.campass.rest.API;
 import net.bingyan.campass.rest.RestHelper;
 import net.bingyan.campass.ui.BaseActivity;
@@ -116,6 +113,7 @@ public class ElectricActivity extends BaseActivity implements View.OnClickListen
             }
         });
     }
+
 
     public void saveAndDisplay(ElectricBean electricJson) {
         ElectricRecordDao electricRecordDao = ((MyApplication) this.getApplicationContext())
