@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="app_white">#fff</color>
-    <color name="app_grey">#ccc</color>
-    <!--home -->
-    <color name="home_gridview_bg_grey">#E4E4E4</color>
-</resources>

@@ -2,6 +2,8 @@ package net.bingyan.campass;
 
 import android.content.Context;
 
+import net.bingyan.campass.greendao.Module;
+import net.bingyan.campass.greendao.ModuleDao;
 import net.bingyan.campass.module.electric.ElectricActivity;
 import net.bingyan.campass.module.news.NewsListActivity;
 

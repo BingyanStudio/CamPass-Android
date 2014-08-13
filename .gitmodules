@@ -1,0 +1,3 @@
+[submodule "submodule"]
+	path = submodule
+	url = http://git.bingyan.net:81/zhanghaoran/binyan-campass-android.git

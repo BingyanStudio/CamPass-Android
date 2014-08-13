@@ -13,7 +13,8 @@ android {
     }
     sourceSets {
         main {
-            java.srcDirs = ['src/main/java', 'src-gen']
+            java.srcDirs = ['src/main/java', 'src-gen','../submodule/src/java']
+            res.srcDirs = ['../submodule/src/res']
         }
     }
     buildTypes {
