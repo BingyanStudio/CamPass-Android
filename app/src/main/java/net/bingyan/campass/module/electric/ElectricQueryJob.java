@@ -6,8 +6,8 @@ import com.path.android.jobqueue.Params;
 import net.bingyan.campass.MyApplication;
 import net.bingyan.campass.greendao.ElectricRecord;
 import net.bingyan.campass.greendao.ElectricRecordDao;
-import net.bingyan.campass.rest.API;
-import net.bingyan.campass.rest.RestHelper;
+import net.bingyan.campass.network.rest.API;
+import net.bingyan.campass.network.rest.RestHelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -87,8 +87,6 @@ public class ElectricQueryJob extends Job {
 
         //从json到数据库的格式转换
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //从数据库到显示出来的转换
-        SimpleDateFormat listFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         int i = 0;
         for (List<String> history : electricJson.getHistory()) {
@@ -109,7 +107,7 @@ public class ElectricQueryJob extends Job {
             electricRecordDao.insertOrReplace(electricRecord);
 
             //将数据库中没有的数据加到List中
-            refreshEvent.addDate(i, listFormat.format(date));
+            refreshEvent.addDate(i, date);
             refreshEvent.addRemain(i++, Float.valueOf(history.get(0)));
         }
         EventBus.getDefault().post(refreshEvent);
@@ -128,9 +126,8 @@ public class ElectricQueryJob extends Job {
         recentDate = list.size() == 0 ? null : list.get(0).getDate();
 
         refreshEvent.clear();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (ElectricRecord record : list) {
-            refreshEvent.addDate(simpleDateFormat.format(record.getDate()));
+            refreshEvent.addDate(record.getDate());
             refreshEvent.addRemain(record.getRemain());
         }
         EventBus.getDefault().post(refreshEvent);

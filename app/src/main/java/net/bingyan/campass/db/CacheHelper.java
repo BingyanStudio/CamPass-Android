@@ -1,4 +1,4 @@
-package net.bingyan.campass.rest;
+package net.bingyan.campass.db;
 
 import android.app.Application;
 

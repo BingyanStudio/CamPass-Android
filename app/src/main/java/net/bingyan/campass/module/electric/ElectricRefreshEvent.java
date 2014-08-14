@@ -1,17 +1,20 @@
 package net.bingyan.campass.module.electric;
 
+import android.provider.ContactsContract;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by jinge on 14-8-13.
  */
 public class ElectricRefreshEvent {
-    private List<String> dateList;
+    private List<Date> dateList;
     private List<Float> remainList;
 
     public ElectricRefreshEvent() {
-        dateList = new ArrayList<String>();
+        dateList = new ArrayList<Date>();
         remainList = new ArrayList<Float>();
     }
 
@@ -20,7 +23,7 @@ public class ElectricRefreshEvent {
         remainList.clear();
     }
 
-    public void addDate(String date) {
+    public void addDate(Date date) {
         dateList.add(date);
     }
 
@@ -28,7 +31,7 @@ public class ElectricRefreshEvent {
         remainList.add(remain);
     }
 
-    public void addDate(int location, String date) {
+    public void addDate(int location, Date date) {
         dateList.add(location, date);
     }
 
@@ -36,7 +39,7 @@ public class ElectricRefreshEvent {
         remainList.add(location, remain);
     }
 
-    public List<String> getDateList() {
+    public List<Date> getDateList() {
         return dateList;
     }
 

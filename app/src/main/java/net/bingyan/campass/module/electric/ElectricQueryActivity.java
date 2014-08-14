@@ -12,7 +12,7 @@ import com.path.android.jobqueue.JobManager;
 
 import net.bingyan.campass.MyApplication;
 import net.bingyan.campass.R;
-import net.bingyan.campass.rest.API;
+import net.bingyan.campass.network.rest.API;
 
 public class ElectricQueryActivity extends Activity implements View.OnClickListener {
 

@@ -1,4 +1,4 @@
-package net.bingyan.campass.rest;
+package net.bingyan.campass.network.rest;
 
 /**
  * Created by ant on 14-7-22.

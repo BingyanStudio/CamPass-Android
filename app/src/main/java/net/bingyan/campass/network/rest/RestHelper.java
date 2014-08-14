@@ -1,4 +1,4 @@
-package net.bingyan.campass.rest;
+package net.bingyan.campass.network.rest;
 
 import retrofit.RestAdapter;
 
