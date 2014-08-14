@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.bingyan.campass.R;
-import net.bingyan.campass.rest.API;
-import net.bingyan.campass.rest.CacheHelper;
-import net.bingyan.campass.rest.RestHelper;
+import net.bingyan.campass.network.rest.API;
+import net.bingyan.campass.db.CacheHelper;
+import net.bingyan.campass.network.rest.RestHelper;
 import net.bingyan.campass.ui.BaseActivity;
 import net.bingyan.campass.util.AppLog;
 
@@ -44,7 +44,7 @@ public class NewsListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.simple_recycleview);
-        newsListBeanCacheHelper = new CacheHelper<NewsListBean>(getApplication(), NewsListBean.class);
+        newsListBeanCacheHelper = new CacheHelper<NewsListBean>(NewsListBean.class);
         init();
     }
 

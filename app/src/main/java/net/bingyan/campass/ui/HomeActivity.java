@@ -34,7 +34,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void initGridView() {
-        ModuleDao moduleDao = ((MyApplication) getApplication()).getDaoSession().getModuleDao();
+        ModuleDao moduleDao = MyApplication.getInstance().getDaoSession().getModuleDao();
         List<Module> modules = moduleDao.
                 queryBuilder().
                 orderDesc(ModuleDao.Properties.Frequency).

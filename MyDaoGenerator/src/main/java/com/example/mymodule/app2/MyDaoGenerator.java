@@ -37,7 +37,7 @@ public class MyDaoGenerator {
         Record.addStringProperty("area");
         Record.addIntProperty("building");
         Record.addIntProperty("dorm");
-        Record.addFloatProperty("remain");
+        Record.addStringProperty("remain");
         Record.addDateProperty("date");
     }
 }

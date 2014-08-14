@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.webkit.WebView;
 
 import net.bingyan.campass.R;
-import net.bingyan.campass.rest.API;
-import net.bingyan.campass.rest.RestHelper;
+import net.bingyan.campass.network.rest.API;
+import net.bingyan.campass.network.rest.RestHelper;
 import net.bingyan.campass.ui.BaseActivity;
 import net.bingyan.campass.util.AppLog;
 

@@ -1,4 +1,4 @@
-package net.bingyan.campass.rest;
+package net.bingyan.campass.db;
 
 import android.app.Application;
 
@@ -18,8 +18,8 @@ public  class CacheHelper<T> {
     Class<T> t;
     CacheDao cacheDao;
 
-    public CacheHelper(Application app, Class<T> t) {
-        DaoSession session = ((MyApplication) app).getDaoSession();
+    public CacheHelper(Class<T> t) {
+        DaoSession session = MyApplication.getInstance().getDaoSession();
         cacheDao = session.getCacheDao();
         this.t=t;
     }

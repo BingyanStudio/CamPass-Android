@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="net.bingyan.campass" >
 
-
     <uses-sdk tools:node="replace" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name=".MyApplication"
@@ -32,6 +33,10 @@
         <activity
             android:name=".module.electric.ElectricActivity"
             android:label="@string/title_activity_electric" >
+        </activity>
+        <activity
+            android:name=".module.electric.ElectricQueryActivity"
+            android:label="@string/title_activity_electric_query" >
         </activity>
     </application>
 
